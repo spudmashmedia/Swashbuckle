@@ -311,6 +311,8 @@ namespace Swashbuckle.Swagger
 
         public string tokenUrl;
 
+        public string JWTTokenName;
+
         public IDictionary<string, string> scopes;
 
         public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();

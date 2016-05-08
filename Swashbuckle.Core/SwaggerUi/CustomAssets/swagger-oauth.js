@@ -127,6 +127,12 @@ function handleLogin() {
       if (authSchemes.hasOwnProperty(key) && OAuthSchemeKeys.indexOf(key) != -1) { //only look at keys that match this scope.
         var flow = authSchemes[key].flow;
 
+        if (authSchemes[key].type === 'oauth2' && flow && (flow === 'hybrid')) {
+            var dets = authSchemes[key];
+            url = dets.authorizationUrl + '?response_type=' + 'token';
+            window.swaggerUi.tokenName = dets.JWTTokenName;
+            state = key;
+        }
         if(authSchemes[key].type === 'oauth2' && flow && (flow === 'implicit' || flow === 'accessCode')) {
           var dets = authSchemes[key];
           url = dets.authorizationUrl + '?response_type=' + (flow === 'implicit' ? 'token' : 'code');

@@ -73,6 +73,7 @@ namespace Swashbuckle.Application
         private string _authorizationUrl;
         private string _tokenUrl;
         private IDictionary<string, string> _scopes = new Dictionary<string, string>();
+        private string _jwtTokenName;
 
         public OAuth2SchemeBuilder Description(string description)
         {
@@ -104,6 +105,12 @@ namespace Swashbuckle.Application
             return this;
         }
 
+        public OAuth2SchemeBuilder JWTTokenName(string tokenName)
+        {
+            _jwtTokenName = tokenName;
+            return this;
+        }
+
         internal override SecurityScheme Build()
         {
             // TODO: Validate required fields for given flow
@@ -114,6 +121,7 @@ namespace Swashbuckle.Application
                 flow = _flow,
                 authorizationUrl = _authorizationUrl,
                 tokenUrl = _tokenUrl,
+                JWTTokenName = _jwtTokenName,
                 scopes = _scopes,
                 description = _description,
             };
